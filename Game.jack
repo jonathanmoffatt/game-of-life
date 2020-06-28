@@ -11,23 +11,30 @@ class Game {
     }
 
     method void run() {
-        var char key;  // the key currently pressed by the user
+        var char key;
         var boolean quit;
-
         do Menu.showMainMenu();
         let quit = false;
-        let key = 0;
-
         while (~quit) {
-            // waits for a key to be pressed
-            while (key = 0) {
-                let key = Keyboard.keyPressed();
-            }
+            let key = Game.waitForKeyPressed();
             if (key = 81)  { let quit = true; }     // q key
-            // waits for the key to be released
-            while (~(key = 0)) {
-                let key = Keyboard.keyPressed();
-            }
+            do Game.waitForKeyReleased(key);
+        }
+        return;
+    }
+
+    function char waitForKeyPressed() {
+        var char key;
+        let key = 0;
+        while (key = 0) {
+            let key = Keyboard.keyPressed();
+        }
+        return key;
+    }
+
+    function void waitForKeyReleased(char key) {
+        while (~(key = 0)) {
+            let key = Keyboard.keyPressed();
         }
         return;
     }
