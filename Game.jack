@@ -20,6 +20,7 @@ class Game {
             if (key = 81)  { let quit = true; }     // q key
             do Game.waitForKeyReleased(key);
         }
+        do Menu.showFarewellMessage();
         return;
     }
 
