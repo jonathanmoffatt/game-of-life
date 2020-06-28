@@ -1,0 +1,34 @@
+class Menu {
+    function void showMainMenu() {
+        var int line;
+        let line = 1;
+        do Menu.print("Conway's Game of Life", line, false);
+        let line = line + 1;
+        do Menu.print("---------------------", line, false);
+        let line = line + 3;
+        do Menu.print("(N) New game", line, true);
+        let line = line + 2;
+        do Menu.print("(E) Examples", line, true);
+        let line = line + 2;
+        do Menu.print("(H) Help", line, true);
+        let line = line + 2;
+        do Menu.print("(Q) Quit", line, true);
+        do Menu.print("Nand to Tetris", 18, false);
+        do Menu.print("Assignment 9", 19, false);
+        do Menu.print("Jonathan Moffatt", 20, false);
+        do Menu.print("June 2020 v0.1", 21, false);
+        return;
+    }
+
+    function void print(String s, int line, boolean indent) {
+        var int x;
+        let x = 2;
+        if (indent) {
+            let x = x + 2;
+        }
+        do Output.moveCursor(line, x);
+        do Output.printString(s);
+        do s.dispose();
+        return;
+    }
+}
