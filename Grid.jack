@@ -24,6 +24,22 @@ class Grid {
         return;
     }
 
+    function void fillFromArray(Array cells) {
+        var int x, y;
+        var Array row;
+        let y = 0;
+        while (y < 32) {
+            let row = cells[y];
+            let x = 0;
+            while (x < 32) {
+                do Grid.fill(x, y, row[x]);
+                let x = x + 1;
+            }
+            let y = y + 1;
+        }
+        return;
+    }
+
     function void fill(int x, int y, boolean color) {
         var int x1, y1;
         let x1 = 257 + (x * 8);

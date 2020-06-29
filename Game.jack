@@ -1,5 +1,6 @@
 class Game {
     field int hackToStopMemoryAllocationError;
+    field Array currentIteration, nextIteration;
 
     constructor Game new() {
         return this;
@@ -16,17 +17,16 @@ class Game {
         var Array example;
         do Menu.showMainMenu();
         do Grid.draw();
-        do Grid.fill(5, 5, true);
-        do Grid.fill(7, 7, true);
-        do Grid.fill(5, 5, false);
         let example = Examples.stillLifes();
+        do Grid.fillFromArray(example);
         let quit = false;
         while (~quit) {
             let key = Game.waitForKeyPressed();
-            if (key = 81)  { let quit = true; }     // q key
+            if (key = 81) { let quit = true; }     // q key
             do Game.waitForKeyReleased(key);
         }
         do Menu.showFarewellMessage();
+        do ArrayHelper.cleanUp(example);
         return;
     }
 

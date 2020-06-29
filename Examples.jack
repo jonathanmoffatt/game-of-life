@@ -2,11 +2,21 @@ class Examples {
     function Array stillLifes() {
         var Array result;
         let result = ArrayHelper.getEmptyGrid();
+        
         // block
         do ArrayHelper.setArrayCell(result, 8, 8, true);
         do ArrayHelper.setArrayCell(result, 8, 9, true);
         do ArrayHelper.setArrayCell(result, 9, 8, true);
         do ArrayHelper.setArrayCell(result, 9, 9, true);
+
+        // bee hive
+        do ArrayHelper.setArrayCell(result, 8, 18, true);
+        do ArrayHelper.setArrayCell(result, 9, 18, true);
+        do ArrayHelper.setArrayCell(result, 7, 19, true);
+        do ArrayHelper.setArrayCell(result, 10, 19, true);
+        do ArrayHelper.setArrayCell(result, 8, 20, true);
+        do ArrayHelper.setArrayCell(result, 9, 20, true);
+
         return result;
     }
 
