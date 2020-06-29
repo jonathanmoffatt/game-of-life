@@ -1,0 +1,13 @@
+class Examples {
+    function Array stillLifes() {
+        var Array result;
+        let result = ArrayHelper.getEmptyGrid();
+        // block
+        do ArrayHelper.setArrayCell(result, 8, 8, true);
+        do ArrayHelper.setArrayCell(result, 8, 9, true);
+        do ArrayHelper.setArrayCell(result, 9, 8, true);
+        do ArrayHelper.setArrayCell(result, 9, 9, true);
+        return result;
+    }
+
+}

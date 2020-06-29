@@ -1,0 +1,44 @@
+class ArrayHelper {
+    function Array getEmptyGrid() {
+        var Array rows, columns;
+        var int i;
+        let rows = ArrayHelper.getEmptyArray();
+        while (i < 32) {
+            let columns = ArrayHelper.getEmptyArray();
+            let rows[i] = columns;
+            let i = i + 1;
+        }
+        return rows;
+    }
+
+    function Array getEmptyArray() {
+        var Array empty;
+        var int i;
+        let empty = Array.new(32);
+        let i = 0;
+        while (i < 32) {
+            let empty[i] = false;
+            let i = i + 1;
+        }
+        return empty;
+    }
+
+    function void setArrayCell(Array cells, int x, int y, boolean alive) {
+        var Array row;
+        let row = cells[y];
+        let row[x] = alive;
+        return;
+    }
+
+    function void cleanUp(Array cells) {
+        var Array row;
+        var int i;
+        while (i < 32) {
+            let row = cells[i];
+            do row.dispose();
+        }
+        do cells.dispose();
+        return;
+    }
+
+}

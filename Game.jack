@@ -13,11 +13,13 @@ class Game {
     method void run() {
         var char key;
         var boolean quit;
+        var Array example;
         do Menu.showMainMenu();
         do Grid.draw();
         do Grid.fill(5, 5, true);
         do Grid.fill(7, 7, true);
         do Grid.fill(5, 5, false);
+        let example = Examples.stillLifes();
         let quit = false;
         while (~quit) {
             let key = Game.waitForKeyPressed();
