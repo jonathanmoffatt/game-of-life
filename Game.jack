@@ -14,6 +14,7 @@ class Game {
         var char key;
         var boolean quit;
         do Menu.showMainMenu();
+        do Grid.draw();
         let quit = false;
         while (~quit) {
             let key = Game.waitForKeyPressed();

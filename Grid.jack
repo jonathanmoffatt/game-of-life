@@ -1,0 +1,26 @@
+class Grid {
+    function void draw() {
+        var int y, i, x, address, pattern;
+        let y = 0;
+        let i = 0;
+        while (y < 256) {
+            let address = 16384 + (y * 32) + 16;
+            if (i = 0) {
+                let pattern = -21846; // dotted line for tops and bottoms of cells
+            } else {
+                let pattern = 257; // left and right sides of cell
+            }
+            let x = 0;
+            while (x < 16) {
+                do Memory.poke(address + x, pattern);
+                let x = x + 1;
+            }
+            let y = y + 2;
+            let i = i + 1;
+            if (i = 4) {
+                let i = 0;
+            }
+        }
+        return;
+    }
+}
