@@ -23,4 +23,13 @@ class Grid {
         }
         return;
     }
+
+    function void fill(int x, int y, boolean color) {
+        var int x1, y1;
+        let x1 = 257 + (x * 8);
+        let y1 = 1 + (y * 8);
+        do Screen.setColor(color);
+        do Screen.drawRectangle(x1, y1, x1 + 6, y1 + 6);
+        return;
+    }
 }

@@ -15,6 +15,9 @@ class Game {
         var boolean quit;
         do Menu.showMainMenu();
         do Grid.draw();
+        do Grid.fill(5, 5, true);
+        do Grid.fill(7, 7, true);
+        do Grid.fill(5, 5, false);
         let quit = false;
         while (~quit) {
             let key = Game.waitForKeyPressed();
