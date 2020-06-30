@@ -5,19 +5,43 @@ class Examples {
         
         // block
         do ArrayHelper.set4By4ArrayCells(result, 1, 1, 
-            false, false, false, false,  
-            false, true, true, false,  
-            false, true, true, false,  
-            false, false, false, false
+            "----",
+            "-xx-",
+            "-xx-",
+            "----"
         );
 
         // bee hive
-        do ArrayHelper.setArrayCell(result, 8, 18, true);
-        do ArrayHelper.setArrayCell(result, 9, 18, true);
-        do ArrayHelper.setArrayCell(result, 7, 19, true);
-        do ArrayHelper.setArrayCell(result, 10, 19, true);
-        do ArrayHelper.setArrayCell(result, 8, 20, true);
-        do ArrayHelper.setArrayCell(result, 9, 20, true);
+        do ArrayHelper.set4By4ArrayCells(result, 7, 1, 
+            "----",
+            "-xx-",
+            "x--x",
+            "-xx-"
+        );
+
+        // loaf
+        do ArrayHelper.set4By4ArrayCells(result, 13, 1, 
+            "-xx-",
+            "x--x",
+            "-x-x",
+            "--x-"
+        );
+
+        // boat
+        do ArrayHelper.set4By4ArrayCells(result, 20, 1, 
+            "----",
+            "xx--",
+            "x-x-",
+            "-x--"
+        );
+
+        // tub
+        do ArrayHelper.set4By4ArrayCells(result, 27, 1, 
+            "----",
+            "-x--",
+            "x-x-",
+            "-x--"
+        );
 
         return result;
     }
