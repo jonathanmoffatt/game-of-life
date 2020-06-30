@@ -30,6 +30,26 @@ class ArrayHelper {
         return;
     }
 
+    function void set4By4ArrayCells(Array cells, int x, int y, boolean x1y1, boolean x2y1, boolean x3y1, boolean x4y1, boolean x1y2, boolean x2y2, boolean x3y2, boolean x4y2, boolean x1y3, boolean x2y3, boolean x3y3, boolean x4y3, boolean x1y4, boolean x2y4, boolean x3y4, boolean x4y4) {
+        do ArrayHelper.setArrayCell(cells, x, y, x1y1);
+        do ArrayHelper.setArrayCell(cells, x + 1, y, x2y1);
+        do ArrayHelper.setArrayCell(cells, x + 2, y, x3y1);
+        do ArrayHelper.setArrayCell(cells, x + 3, y, x4y1);
+        do ArrayHelper.setArrayCell(cells, x, y + 1, x1y2);
+        do ArrayHelper.setArrayCell(cells, x + 1, y + 1, x2y2);
+        do ArrayHelper.setArrayCell(cells, x + 2, y + 1, x3y2);
+        do ArrayHelper.setArrayCell(cells, x + 3, y + 1, x4y2);
+        do ArrayHelper.setArrayCell(cells, x, y + 2, x1y3);
+        do ArrayHelper.setArrayCell(cells, x + 1, y + 2, x2y3);
+        do ArrayHelper.setArrayCell(cells, x + 2, y + 2, x3y3);
+        do ArrayHelper.setArrayCell(cells, x + 3, y + 2, x4y3);
+        do ArrayHelper.setArrayCell(cells, x, y + 3, x1y4);
+        do ArrayHelper.setArrayCell(cells, x + 1, y + 3, x2y4);
+        do ArrayHelper.setArrayCell(cells, x + 2, y + 3, x3y4);
+        do ArrayHelper.setArrayCell(cells, x + 3, y + 3, x4y4);
+        return;
+    }
+
     function void cleanUp(Array cells) {
         var Array row;
         var int i;
