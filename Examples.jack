@@ -1,10 +1,8 @@
 class Examples {
-    function Array stillLifes() {
-        var Array result;
-        let result = ArrayHelper.getEmptyGrid();
+    function void buildStillLifes(Array grid, int row) {
         
         // block
-        do ArrayHelper.set4By4ArrayCells(result, 1, 1, 
+        do ArrayHelper.set4By4ArrayCells(grid, 1, row, 
             "----",
             "-xx-",
             "-xx-",
@@ -12,7 +10,7 @@ class Examples {
         );
 
         // bee hive
-        do ArrayHelper.set4By4ArrayCells(result, 7, 1, 
+        do ArrayHelper.set4By4ArrayCells(grid, 7, row, 
             "----",
             "-xx-",
             "x--x",
@@ -20,7 +18,7 @@ class Examples {
         );
 
         // loaf
-        do ArrayHelper.set4By4ArrayCells(result, 13, 1, 
+        do ArrayHelper.set4By4ArrayCells(grid, 13, row, 
             "-xx-",
             "x--x",
             "-x-x",
@@ -28,7 +26,7 @@ class Examples {
         );
 
         // boat
-        do ArrayHelper.set4By4ArrayCells(result, 20, 1, 
+        do ArrayHelper.set4By4ArrayCells(grid, 20, row, 
             "----",
             "xx--",
             "x-x-",
@@ -36,14 +34,14 @@ class Examples {
         );
 
         // tub
-        do ArrayHelper.set4By4ArrayCells(result, 27, 1, 
+        do ArrayHelper.set4By4ArrayCells(grid, 27, row, 
             "----",
             "-x--",
             "x-x-",
             "-x--"
         );
 
-        return result;
+        return;
     }
 
 }
