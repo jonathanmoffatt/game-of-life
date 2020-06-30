@@ -1,6 +1,8 @@
 class Menu {
     function void showMainMenu() {
         var int line;
+
+        do Screen.clearScreen();
         let line = 1;
         do Menu.print("Conway's Game of Life", line, 2);
         let line = line + 1;
@@ -17,6 +19,31 @@ class Menu {
         do Menu.print("Assignment 9", 19, 2);
         do Menu.print("Jonathan Moffatt", 20, 2);
         do Menu.print("June 2020 v0.1", 21, 2);
+        do Grid.draw();
+        return;
+    }
+
+    function void showExamplesMenu() {
+        var int line;
+
+        do Screen.clearScreen();
+        let line = 1;
+        do Menu.print("Examples", line, 2);
+        let line = line + 1;
+        do Menu.print("--------", line, 2);
+        let line = line + 3;
+        do Menu.print("(L) Still lifes", line, 4);
+        let line = line + 2;
+        do Menu.print("(O) Oscillators", line, 4);
+        let line = line + 2;
+        do Menu.print("(S) Spaceships", line, 4);
+        let line = line + 2;
+        do Menu.print("(Q) Quit", line, 4);
+        do Menu.print("Nand to Tetris", 18, 2);
+        do Menu.print("Assignment 9", 19, 2);
+        do Menu.print("Jonathan Moffatt", 20, 2);
+        do Menu.print("June 2020 v0.1", 21, 2);
+        do Grid.draw();
         return;
     }
 
