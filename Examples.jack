@@ -1,47 +1,113 @@
 class Examples {
     function void buildStillLifes(Array grid, int row) {
-        
+        var Array block;
+
         // block
-        do ArrayHelper.set4By4ArrayCells(grid, 1, row, 
-            "----",
-            "-xx-",
-            "-xx-",
-            "----"
-        );
+        let block = Array.new(2);
+        let block[0] = "xx";
+        let block[1] = "xx";
+        do ArrayHelper.setArrayCells(grid, 2, row + 1, 2, block);
+        do block.dispose();
 
         // bee hive
-        do ArrayHelper.set4By4ArrayCells(grid, 7, row, 
-            "----",
-            "-xx-",
-            "x--x",
-            "-xx-"
-        );
+        let block = Array.new(3);
+        let block[0] = "-xx-";
+        let block[1] = "x--x";
+        let block[2] = "-xx-";
+        do ArrayHelper.setArrayCells(grid, 7, row, 3, block);
+        do block.dispose();
 
         // loaf
-        do ArrayHelper.set4By4ArrayCells(grid, 13, row, 
-            "-xx-",
-            "x--x",
-            "-x-x",
-            "--x-"
-        );
+        let block = Array.new(4);
+        let block[0] = "-xx-";
+        let block[1] = "x--x";
+        let block[2] = "-x-x";
+        let block[3] = "--x-";
+        do ArrayHelper.setArrayCells(grid, 13, row, 4, block);
+        do block.dispose();
 
         // boat
-        do ArrayHelper.set4By4ArrayCells(grid, 20, row, 
-            "----",
-            "xx--",
-            "x-x-",
-            "-x--"
-        );
+        let block = Array.new(3);
+        let block[0] = "xx--";
+        let block[1] = "x-x-";
+        let block[2] = "-x--";
+        do ArrayHelper.setArrayCells(grid, 20, row, 3, block);
+        do block.dispose();
 
         // tub
-        do ArrayHelper.set4By4ArrayCells(grid, 27, row, 
-            "----",
-            "-x--",
-            "x-x-",
-            "-x--"
-        );
+        let block = Array.new(3);
+        let block[0] = "-x--";
+        let block[1] = "x-x-";
+        let block[2] = "-x--";
+        do ArrayHelper.setArrayCells(grid, 27, row, 3, block);
+        do block.dispose();
 
         return;
     }
 
+    function void buildOscillators(Array grid) {
+        var Array block;
+        var int row;
+
+        let row = 5;
+
+        // blinker
+        let block = Array.new(3);
+        let block[0] = "x";
+        let block[1] = "x";
+        let block[2] = "x";
+        do ArrayHelper.setArrayCells(grid, 8, row, 3, block);
+        do block.dispose();
+
+        // toad
+        let block = Array.new(2);
+        let block[0] = "-xxx";
+        let block[1] = "xxx-";
+        do ArrayHelper.setArrayCells(grid, 14, row, 2, block);
+        do block.dispose();
+
+        // beacon
+        let block = Array.new(4);
+        let block[0] = "xx--";
+        let block[1] = "xx--";
+        let block[2] = "--xx";
+        let block[3] = "--xx";
+        do ArrayHelper.setArrayCells(grid, 22, row, 4, block);
+        do block.dispose();
+
+        let row = 17;
+
+        // penta-decathalon
+        let block = Array.new(8);
+        let block[0] = "xxx";
+        let block[1] = "x-x";
+        let block[2] = "xxx";
+        let block[3] = "xxx";
+        let block[4] = "xxx";
+        let block[5] = "xxx";
+        let block[6] = "x-x";
+        let block[7] = "xxx";
+        do ArrayHelper.setArrayCells(grid, 5, row, 8, block);
+        do block.dispose();
+
+        // pulsar
+        let block = Array.new(13);
+        let block[0] = "--xxx---xxx--";
+        let block[1] = "-------------";
+        let block[2] = "x----x-x----x";
+        let block[3] = "x----x-x----x";
+        let block[4] = "x----x-x----x";
+        let block[5] = "--xxx---xxx--";
+        let block[6] = "-------------";
+        let block[7] = "--xxx---xxx--";
+        let block[8] = "x----x-x----x";
+        let block[9] = "x----x-x----x";
+        let block[10]= "x----x-x----x";
+        let block[11]= "-------------";
+        let block[12]= "--xxx---xxx--";
+        do ArrayHelper.setArrayCells(grid, 15, row - 2, 13, block);
+        do block.dispose();
+
+        return;
+    }
 }

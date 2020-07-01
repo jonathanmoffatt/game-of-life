@@ -2,6 +2,7 @@ class ArrayHelper {
     function Array getEmptyGrid() {
         var Array rows, columns;
         var int i;
+        let i = 0;
         let rows = ArrayHelper.getEmptyArray();
         while (i < 32) {
             let columns = ArrayHelper.getEmptyArray();
@@ -13,14 +14,29 @@ class ArrayHelper {
 
     function Array getEmptyArray() {
         var Array empty;
-        var int i;
         let empty = Array.new(32);
+        do ArrayHelper.clearGridRow(empty);
+        return empty;
+    }
+
+    function void clearGridRow(Array gridRow) {
+        var int i;
         let i = 0;
         while (i < 32) {
-            let empty[i] = false;
+            let gridRow[i] = false;
             let i = i + 1;
         }
-        return empty;
+        return;
+    }
+
+    function void clearGrid(Array grid) {
+        var int row;
+        let row = 0;
+        while (row < 32) {
+            do ArrayHelper.clearGridRow(grid[row]);
+            let row = row + 1;
+        }
+        return;
     }
 
     function void setArrayCell(Array cells, int x, int y, boolean alive) {
@@ -30,29 +46,20 @@ class ArrayHelper {
         return;
     }
 
-    function void set4By4ArrayCells(Array cells, int x, int y, String row1, String row2, String row3, String row4) {
-        // a - (char 45) will leave the cell blank, anything else will set it
-        do ArrayHelper.setArrayCell(cells, x, y, ~(row1.charAt(0) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 1, y, ~(row1.charAt(1) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 2, y, ~(row1.charAt(2) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 3, y, ~(row1.charAt(3) = 45));
-        do ArrayHelper.setArrayCell(cells, x, y + 1, ~(row2.charAt(0) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 1, y + 1, ~(row2.charAt(1) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 2, y + 1, ~(row2.charAt(2) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 3, y + 1, ~(row2.charAt(3) = 45));
-        do ArrayHelper.setArrayCell(cells, x, y + 2, ~(row3.charAt(0) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 1, y + 2, ~(row3.charAt(1) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 2, y + 2, ~(row3.charAt(2) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 3, y + 2, ~(row3.charAt(3) = 45));
-        do ArrayHelper.setArrayCell(cells, x, y + 3, ~(row4.charAt(0) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 1, y + 3, ~(row4.charAt(1) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 2, y + 3, ~(row4.charAt(2) = 45));
-        do ArrayHelper.setArrayCell(cells, x + 3, y + 3, ~(row4.charAt(3) = 45));
-
-        do row1.dispose();
-        do row2.dispose();
-        do row3.dispose();
-        do row4.dispose();
+    function void setArrayCells(Array cells, int x, int y, int height, Array cellsAsString) {
+        var int i, j;
+        var String row;
+        let i = 0;
+        while (i < height) {
+            let row = cellsAsString[i];
+            let j = 0;
+            while (j < row.length()) {
+                // a - (char 45) will leave the cell blank, anything else will set it
+                do ArrayHelper.setArrayCell(cells, x + j, y + i, ~(row.charAt(j) = 45));
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
         return;
     }
 

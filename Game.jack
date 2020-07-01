@@ -5,12 +5,6 @@ class Game {
         return this;
     }
 
-    method void dispose() {
-        do ArrayHelper.cleanUp(currentIteration);
-        do Memory.deAlloc(this);
-        return;
-    }
-
     method void run() {
         var char key;
         var boolean quit, refresh;
@@ -27,13 +21,20 @@ class Game {
             if ((menu = 2) & refresh) { do Menu.showExamplesMenu(); }
             let currentMenu = menu;
             let key = Game.waitForKeyPressed();
-            // E key
+            // E key: examples menu
             if ((key = 69) & (menu = 1)) { let menu = 2; }
-            // L key
+            // L key: still lifes
             if ((key = 76) & (menu = 2)) {
+                do ArrayHelper.clearGrid(currentIteration);
                 do Examples.buildStillLifes(currentIteration, 12);
                 do Grid.fillFromArray(currentIteration);
             } 
+            // O key: oscillators
+            if ((key = 79) & (menu = 2)) {
+                do ArrayHelper.clearGrid(currentIteration);
+                do Examples.buildOscillators(currentIteration);
+                do Grid.fillFromArray(currentIteration);
+            }
             // Q key
             if (key = 81) {
                 if (menu = 1) { let quit = true; } 
@@ -43,6 +44,12 @@ class Game {
         }
 
         do Menu.showFarewellMessage();
+        return;
+    }
+
+    method void dispose() {
+        do ArrayHelper.cleanUp(currentIteration);
+        do Memory.deAlloc(this);
         return;
     }
 
