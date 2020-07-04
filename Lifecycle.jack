@@ -122,6 +122,14 @@ class Lifecycle {
         return;
     }
 
+    method void toggleCell(int x, int y) {
+        var Array iteration, row;
+        let iteration = getCurrentIteration();
+        let row = iteration[y];
+        let row[x] = ~row[x];
+        return;
+    }
+
     method void dispose() {
         do ArrayHelper.cleanUp(iteration1);
         do ArrayHelper.cleanUp(iteration2);

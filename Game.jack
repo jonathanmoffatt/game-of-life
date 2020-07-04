@@ -1,10 +1,14 @@
 class Game {
     field Lifecycle lifecycle;
-    static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS;
+    field int x, y;
+    static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS, MENU_NEW_GAME;
     static int SPEED_SLOW, SPEED_FAST;
-    static char KEY_E, KEY_G, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_M, KEY_H, KEY_NONE;
+    static char KEY_NONE, KEY_SPACE, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN;
+    static char KEY_E, KEY_G, KEY_H, KEY_L, KEY_M, KEY_N, KEY_O, KEY_P, KEY_Q, KEY_R, KEY_S;
 
     constructor Game new() {
+        let x = 0;
+        let y = 0;
         return this;
     }
     
@@ -14,16 +18,24 @@ class Game {
         let MENU_STILL_LIFES = 3;
         let MENU_OSCILLATORS = 4;
         let MENU_SPACESHIPS = 5;
+        let MENU_NEW_GAME = 6;
         let SPEED_SLOW = 650;
         let SPEED_FAST = 300;
+        let KEY_SPACE = 32;
+        let KEY_LEFT = 130;
+        let KEY_UP = 131;
+        let KEY_RIGHT = 132;
+        let KEY_DOWN = 133;
         let KEY_E = 69;
         let KEY_G = 71;
         let KEY_H = 72;
         let KEY_L = 76;
         let KEY_M = 77;
+        let KEY_N = 78;
         let KEY_O = 79;
         let KEY_P = 80;
         let KEY_Q = 81;
+        let KEY_R = 82;
         let KEY_S = 83;
         return;
     }
@@ -43,34 +55,55 @@ class Game {
         while (~quit) {
             let key = Keyboard.keyPressed();
 
-            // examples menu
-            if ((key = KEY_E) & (menu = MENU_MAIN)) { 
-                let menu = MENU_EXAMPLES; 
-                do Menu.showExamplesMenu();
+            if (menu = MENU_MAIN) {
+                // new game
+                if (key = KEY_N) {
+                    let menu = MENU_NEW_GAME;
+                    do Menu.showNewGameMenu();
+                    do lifecycle.clear();
+                }
+                // examples
+                if (key = KEY_E) { 
+                    let menu = MENU_EXAMPLES; 
+                    do Menu.showExamplesMenu();
+                }
             }
 
-            // still lifes
-            if ((key = KEY_L) & (menu = MENU_EXAMPLES)) {
-                let menu = MENU_STILL_LIFES;
-                do Menu.showStillLifesMenu();
-                do Examples.buildStillLifes(lifecycle, 9);
-                let running = true;
-            } 
-
-            // oscillators
-            if ((key = KEY_O) & (menu = MENU_EXAMPLES)) {
-                let menu = MENU_OSCILLATORS;
-                do Menu.showOscillatorsMenu();
-                do Examples.buildOscillators(lifecycle);
-                let speed = SPEED_SLOW;
-                let running = true;
+            if (menu = MENU_NEW_GAME) {
+                if (key = KEY_LEFT) { do moveEditorLeft(); }
+                if (key = KEY_RIGHT) { do moveEditorRight(); }
+                if (key = KEY_UP) { do moveEditorUp(); }
+                if (key = KEY_DOWN) { do moveEditorDown(); }
+                if (key = KEY_SPACE) { 
+                    do lifecycle.toggleCell(x, y); 
+                    do draw();
+                }
             }
 
-            // spaceships
-            if ((key = KEY_S) & (menu = MENU_EXAMPLES)) {
-                let menu = MENU_SPACESHIPS;
-                let speed = SPEED_FAST;
-                do Menu.showSpaceshipsMenu();
+            if (menu = MENU_EXAMPLES) {
+                // still lifes
+                if (key = KEY_L) {
+                    let menu = MENU_STILL_LIFES;
+                    do Menu.showStillLifesMenu();
+                    do Examples.buildStillLifes(lifecycle, 9);
+                    let running = true;
+                } 
+
+                // oscillators
+                if (key = KEY_O) {
+                    let menu = MENU_OSCILLATORS;
+                    do Menu.showOscillatorsMenu();
+                    do Examples.buildOscillators(lifecycle);
+                    let speed = SPEED_SLOW;
+                    let running = true;
+                }
+
+                // spaceships
+                if (key = KEY_S) {
+                    let menu = MENU_SPACESHIPS;
+                    let speed = SPEED_FAST;
+                    do Menu.showSpaceshipsMenu();
+                }
             }
 
             if (menu = MENU_SPACESHIPS) {
@@ -103,14 +136,14 @@ class Game {
                     do Menu.showFarewellMessage();
                     let quit = true; 
                 } 
-                if (menu = MENU_EXAMPLES) { 
+                if ((menu = MENU_EXAMPLES) | (menu = MENU_NEW_GAME)) { 
                     let menu = MENU_MAIN; 
                     do Menu.showMainMenu();
                 }
                 if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS) | (menu = MENU_SPACESHIPS)) { 
                     let menu = MENU_EXAMPLES; 
-                    do lifecycle.clear();
                     do Menu.showExamplesMenu();
+                    do lifecycle.clear();
                 }
                 let running = false;
             }
@@ -119,12 +152,37 @@ class Game {
             }
 
             if (running) {
-                do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                do draw();
                 do lifecycle.tick();
                 do KeyboardHelper.waitForTimePeriodOrKeyPress(speed);
             }
         }
 
+        return;
+    }
+
+    method void draw() {
+        do Grid.fillFromArray(lifecycle.getCurrentIteration());
+        return;
+    }
+
+    method void moveEditorLeft() {
+        if (x = 0) { let x = 31; } else { let x = x - 1; }
+        return;
+    }
+
+    method void moveEditorRight() {
+        if (x = 31) { let x = 0; } else { let x = x + 1; }
+        return;
+    }
+
+    method void moveEditorUp() {
+        if (y = 0) { let y = 31; } else { let y = y - 1; }
+        return;
+    }
+
+    method void moveEditorDown() {
+        if (y = 31) { let y = 0; } else { let y = y + 1; }
         return;
     }
 
