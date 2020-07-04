@@ -2,7 +2,7 @@ class Game {
     field Lifecycle lifecycle;
     field Editor editor;
     field int x, y;
-    static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS, MENU_NEW_GAME;
+    static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS, MENU_NEW_GAME, MENU_RUNNING;
     static int SPEED_SLOW, SPEED_FAST;
     static char KEY_NONE, KEY_SPACE, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN;
     static char KEY_E, KEY_G, KEY_H, KEY_L, KEY_M, KEY_N, KEY_O, KEY_P, KEY_Q, KEY_R, KEY_S;
@@ -20,6 +20,7 @@ class Game {
         let MENU_OSCILLATORS = 4;
         let MENU_SPACESHIPS = 5;
         let MENU_NEW_GAME = 6;
+        let MENU_RUNNING = 7;
         let SPEED_SLOW = 650;
         let SPEED_FAST = 300;
         let KEY_SPACE = 32;
@@ -43,7 +44,7 @@ class Game {
 
     method void run() {
         var char key;
-        var boolean quit, running, arrow;
+        var boolean quit, running, arrow, canBeRunning;
         var int menu, speed;
 
         let lifecycle = Lifecycle.new();
@@ -57,6 +58,7 @@ class Game {
         while (~quit) {
             let key = Keyboard.keyPressed();
             let arrow = (key = KEY_UP) | (key = KEY_DOWN) | (key = KEY_LEFT) | (key = KEY_RIGHT);
+            let canBeRunning = (menu = MENU_STILL_LIFES) | (menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS) | (menu = MENU_RUNNING);
 
             if (menu = MENU_MAIN) {
                 // new game
@@ -79,6 +81,19 @@ class Game {
                 if (key = KEY_UP) { do editor.moveUp(); }
                 if (key = KEY_DOWN) { do editor.moveDown(); }
                 if (key = KEY_SPACE) { do editor.toggleCell(); }
+                if (key = KEY_R) {
+                    let menu = MENU_RUNNING;
+                    do editor.stopEditing();
+                    do lifecycle.save();
+                    do Menu.showRunningMenu();
+                    let running = true;
+                }
+            }
+
+            if (menu = MENU_RUNNING) {
+                if (key = KEY_R) {
+                    do lifecycle.restore();
+                }
             }
 
             if (menu = MENU_EXAMPLES) {
@@ -127,7 +142,7 @@ class Game {
             }
 
             // pause or unpause
-            if ((key = KEY_P) & ((menu = MENU_STILL_LIFES) | (menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS))) {
+            if ((key = KEY_P) & canBeRunning) {
                 let running = ~running;
             }
 
@@ -141,6 +156,12 @@ class Game {
                     let menu = MENU_MAIN; 
                     do Menu.showMainMenu();
                 }
+                if (menu = MENU_RUNNING) {
+                    let menu = MENU_NEW_GAME;
+                    do Menu.showNewGameMenu();
+                    do lifecycle.restore();
+                    do draw();
+                }
                 if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS) | (menu = MENU_SPACESHIPS)) { 
                     let menu = MENU_EXAMPLES; 
                     do Menu.showExamplesMenu();
@@ -148,12 +169,8 @@ class Game {
                 }
                 let running = false;
             }
-            if (~(key = KEY_NONE) & ~arrow) {
-                do KeyboardHelper.waitForKeyReleased(key);
-            }
-            if (arrow) {
-                do Sys.wait(150);
-            }
+            if (~(key = KEY_NONE) & ~arrow) { do KeyboardHelper.waitForKeyReleased(key); }
+            if (arrow) { do Sys.wait(150); }
 
             if (running) {
                 do draw();

@@ -57,6 +57,23 @@ class ArrayHelper {
         return;
     }
 
+    function void copyGrid(Array source, Array target) {
+        var Array sourceRow, targetRow;
+        var int x, y;
+        let y = 0;
+        while (y < 32) {
+            let sourceRow = source[y];
+            let targetRow = target[y];
+            let x = 0;
+            while (x < 32) {
+                let targetRow[x] = sourceRow[x];
+                let x = x + 1;
+            }
+            let y = y + 1;
+        }
+        return;
+    }
+
     function void cleanUp(Array cells) {
         var Array row;
         var int i;

@@ -1,10 +1,11 @@
 class Lifecycle {
-    field Array iteration1, iteration2;
+    field Array iteration1, iteration2, savedState;
     field boolean currentIsIteration1;
 
     constructor Lifecycle new() {
         let iteration1 = ArrayHelper.getEmptyGrid();
         let iteration2 = ArrayHelper.getEmptyGrid();
+        let savedState = ArrayHelper.getEmptyGrid();
         let currentIsIteration1 = true;
         return this;
     }
@@ -115,6 +116,20 @@ class Lifecycle {
         return;
     }
 
+    method void save() {
+        var Array iteration;
+        let iteration = getCurrentIteration();
+        do ArrayHelper.copyGrid(iteration, savedState);
+        return;
+    }
+
+    method void restore() {
+        var Array iteration;
+        let iteration = getCurrentIteration();
+        do ArrayHelper.copyGrid(savedState, iteration);
+        return;
+    }
+
     method void setCells(int x, int y, String cells) {
         var Array iteration;
         let iteration = getCurrentIteration();
@@ -140,6 +155,7 @@ class Lifecycle {
     method void dispose() {
         do ArrayHelper.cleanUp(iteration1);
         do ArrayHelper.cleanUp(iteration2);
+        do ArrayHelper.cleanUp(savedState);
         do Memory.deAlloc(this);
         return;
     }
