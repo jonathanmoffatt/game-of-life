@@ -122,12 +122,19 @@ class Lifecycle {
         return;
     }
 
-    method void toggleCell(int x, int y) {
+    method boolean toggleCell(int x, int y) {
         var Array iteration, row;
         let iteration = getCurrentIteration();
         let row = iteration[y];
         let row[x] = ~row[x];
-        return;
+        return row[x];
+    }
+
+    method boolean isAlive(int x, int y) {
+        var Array iteration, row;
+        let iteration = getCurrentIteration();
+        let row = iteration[y];
+        return row[x];
     }
 
     method void dispose() {

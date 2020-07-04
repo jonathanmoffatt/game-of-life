@@ -1,5 +1,6 @@
 class Game {
     field Lifecycle lifecycle;
+    field Editor editor;
     field int x, y;
     static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS, MENU_NEW_GAME;
     static int SPEED_SLOW, SPEED_FAST;
@@ -42,10 +43,11 @@ class Game {
 
     method void run() {
         var char key;
-        var boolean quit, running;
+        var boolean quit, running, arrow;
         var int menu, speed;
 
         let lifecycle = Lifecycle.new();
+        let editor = Editor.new(lifecycle);
         let quit = false;
         let running = false;
         let menu = MENU_MAIN;
@@ -54,6 +56,7 @@ class Game {
 
         while (~quit) {
             let key = Keyboard.keyPressed();
+            let arrow = (key = KEY_UP) | (key = KEY_DOWN) | (key = KEY_LEFT) | (key = KEY_RIGHT);
 
             if (menu = MENU_MAIN) {
                 // new game
@@ -61,6 +64,7 @@ class Game {
                     let menu = MENU_NEW_GAME;
                     do Menu.showNewGameMenu();
                     do lifecycle.clear();
+                    do editor.startEditing();
                 }
                 // examples
                 if (key = KEY_E) { 
@@ -70,14 +74,11 @@ class Game {
             }
 
             if (menu = MENU_NEW_GAME) {
-                if (key = KEY_LEFT) { do moveEditorLeft(); }
-                if (key = KEY_RIGHT) { do moveEditorRight(); }
-                if (key = KEY_UP) { do moveEditorUp(); }
-                if (key = KEY_DOWN) { do moveEditorDown(); }
-                if (key = KEY_SPACE) { 
-                    do lifecycle.toggleCell(x, y); 
-                    do draw();
-                }
+                if (key = KEY_LEFT) { do editor.moveLeft(); }
+                if (key = KEY_RIGHT) { do editor.moveRight(); }
+                if (key = KEY_UP) { do editor.moveUp(); }
+                if (key = KEY_DOWN) { do editor.moveDown(); }
+                if (key = KEY_SPACE) { do editor.toggleCell(); }
             }
 
             if (menu = MENU_EXAMPLES) {
@@ -147,8 +148,11 @@ class Game {
                 }
                 let running = false;
             }
-            if (~(key = KEY_NONE)) {
+            if (~(key = KEY_NONE) & ~arrow) {
                 do KeyboardHelper.waitForKeyReleased(key);
+            }
+            if (arrow) {
+                do Sys.wait(150);
             }
 
             if (running) {
@@ -163,26 +167,6 @@ class Game {
 
     method void draw() {
         do Grid.fillFromArray(lifecycle.getCurrentIteration());
-        return;
-    }
-
-    method void moveEditorLeft() {
-        if (x = 0) { let x = 31; } else { let x = x - 1; }
-        return;
-    }
-
-    method void moveEditorRight() {
-        if (x = 31) { let x = 0; } else { let x = x + 1; }
-        return;
-    }
-
-    method void moveEditorUp() {
-        if (y = 0) { let y = 31; } else { let y = y - 1; }
-        return;
-    }
-
-    method void moveEditorDown() {
-        if (y = 31) { let y = 0; } else { let y = y + 1; }
         return;
     }
 

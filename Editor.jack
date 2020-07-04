@@ -1,0 +1,81 @@
+class Editor {
+    field Lifecycle lifecycle;
+    field int x, y;
+    field boolean cursorColor, editing;
+
+    constructor Editor new(Lifecycle theLifecycle) {
+        let lifecycle = theLifecycle;
+        let x = 0;
+        let y = 0;
+        let editing = false;
+        return this;
+    }
+
+    method void startEditing() {
+        let editing = true;
+        do drawCursor();
+        return;
+    }
+
+    method void stopEditing() {
+        do hideCursor();
+        let editing = false;
+        return;
+    }
+
+    method void drawCursor() {
+        var boolean alive;
+        if (editing) {
+            let alive = lifecycle.isAlive(x, y);
+            do Grid.drawCursor(x, y, ~alive);
+        }
+        return;
+    }
+
+    method void hideCursor() {
+        var boolean alive;
+        let alive = lifecycle.isAlive(x, y);
+        do Grid.drawCursor(x, y, alive);
+        return;
+    }
+
+    method void toggleCell() {
+        do lifecycle.toggleCell(x, y); 
+        do Grid.fillFromArray(lifecycle.getCurrentIteration());
+        do drawCursor();
+        return;
+    }
+
+    method void moveLeft() {
+        do hideCursor();
+        if (x = 0) { let x = 31; } else { let x = x - 1; }
+        do drawCursor();
+        return;
+    }
+
+    method void moveRight() {
+        do hideCursor();
+        if (x = 31) { let x = 0; } else { let x = x + 1; }
+        do drawCursor();
+        return;
+    }
+
+    method void moveUp() {
+        do hideCursor();
+        if (y = 0) { let y = 31; } else { let y = y - 1; }
+        do drawCursor();
+        return;
+    }
+
+    method void moveDown() {
+        do hideCursor();
+        if (y = 31) { let y = 0; } else { let y = y + 1; }
+        do drawCursor();
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}
