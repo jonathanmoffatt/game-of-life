@@ -15,10 +15,7 @@ class Menu {
         do Menu.print("(H) Help", line, 4);
         let line = line + 2;
         do Menu.print("(Q) Quit", line, 4);
-        do Menu.print("Nand to Tetris", 18, 2);
-        do Menu.print("Assignment 9", 19, 2);
-        do Menu.print("Jonathan Moffatt", 20, 2);
-        do Menu.print("June 2020 v0.1", 21, 2);
+        do Menu.showFooter();
         do Grid.draw();
         return;
     }
@@ -39,11 +36,37 @@ class Menu {
         do Menu.print("(S) Spaceships", line, 4);
         let line = line + 2;
         do Menu.print("(Q) Quit", line, 4);
+        do Menu.showFooter();
+        do Grid.draw();
+        return;
+    }
+
+    function void showOscillatorsMenu() {
+        var int line;
+
+        do Screen.clearScreen();
+        let line = 1;
+        do Menu.print("Oscillators", line, 2);
+        let line = line + 1;
+        do Menu.print("-----------", line, 2);
+        let line = line + 3;
+        do Menu.print("Blinker / Toad / Beacon", line, 4);
+        let line = line + 2;
+        do Menu.print("Penta decathlon / Pulsar", line, 4);
+        let line = line + 3;
+        do Menu.print("(P) Pause or unpause", line, 4);
+        let line = line + 2;
+        do Menu.print("(Q) Quit", line, 4);
+        do Menu.showFooter();
+        do Grid.draw();
+        return;
+    }
+
+    function void showFooter() {
         do Menu.print("Nand to Tetris", 18, 2);
         do Menu.print("Assignment 9", 19, 2);
         do Menu.print("Jonathan Moffatt", 20, 2);
         do Menu.print("June 2020 v0.1", 21, 2);
-        do Grid.draw();
         return;
     }
 

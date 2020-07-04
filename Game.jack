@@ -21,24 +21,30 @@ class Game {
             if ((menu = 2) & refresh) { do Menu.showExamplesMenu(); }
             let currentMenu = menu;
             let key = Game.waitForKeyPressed();
+
             // E key: examples menu
             if ((key = 69) & (menu = 1)) { let menu = 2; }
+
             // L key: still lifes
             if ((key = 76) & (menu = 2)) {
                 do ArrayHelper.clearGrid(currentIteration);
                 do Examples.buildStillLifes(currentIteration, 12);
                 do Grid.fillFromArray(currentIteration);
             } 
+
             // O key: oscillators
             if ((key = 79) & (menu = 2)) {
-                do ArrayHelper.clearGrid(currentIteration);
+                do Menu.showOscillatorsMenu();
                 do Examples.buildOscillators(currentIteration);
                 do Grid.fillFromArray(currentIteration);
+                let menu = 4;
             }
-            // Q key
+
+            // Q key: quit or move back to previous menu
             if (key = 81) {
                 if (menu = 1) { let quit = true; } 
-                else { let menu = 1; }
+                if (menu = 2) { let menu = 1; }
+                if (menu = 4) { let menu = 2; }
             }
             do Game.waitForKeyReleased(key);
         }
