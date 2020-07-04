@@ -21,11 +21,11 @@ class Game {
             if ((menu = 1) & refresh) { do Menu.showMainMenu(); }
             if ((menu = 2) & refresh) { do Menu.showExamplesMenu(); }
             let currentMenu = menu;
-            // if (running) {
-            //     let key = Keyboard.keyPressed();
-            // } else {
-                let key = Game.waitForKeyPressed();
-            // }
+            if (running) {
+                let key = Keyboard.keyPressed();
+            } else {
+                let key = KeyboardHelper.waitForKeyPressed();
+            }
 
             // E key: examples menu
             if ((key = 69) & (menu = 1)) { let menu = 2; }
@@ -47,6 +47,11 @@ class Game {
                 let menu = 4;
             }
 
+            // P key: pause or unpause
+            if ((key = 80) & (menu = 4)) {
+                let running = ~running;
+            }
+
             // Q key: quit or move back to previous menu
             if (key = 81) {
                 if (menu = 1) { let quit = true; } 
@@ -55,14 +60,14 @@ class Game {
                 if (menu = 4) { let menu = 2; }
                 let running = false;
             }
-            // if (~(key = 0)) {
-                do Game.waitForKeyReleased(key);
-            // }
+            if (~(key = 0)) {
+                do KeyboardHelper.waitForKeyReleased(key);
+            }
 
             if (running) {
-                // do Sys.wait(1000);
                 do lifecycle.tick();
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                do KeyboardHelper.waitForTimePeriodOrKeyPress(650);
             }
         }
 
@@ -76,19 +81,4 @@ class Game {
         return;
     }
 
-    function char waitForKeyPressed() {
-        var char key;
-        let key = 0;
-        while (key = 0) {
-            let key = Keyboard.keyPressed();
-        }
-        return key;
-    }
-
-    function void waitForKeyReleased(char key) {
-        while (~(key = 0)) {
-            let key = Keyboard.keyPressed();
-        }
-        return;
-    }
 }

@@ -1,0 +1,31 @@
+class KeyboardHelper {
+
+    function char waitForKeyPressed() {
+        var char key;
+        let key = 0;
+        while (key = 0) {
+            let key = Keyboard.keyPressed();
+        }
+        return key;
+    }
+
+    function void waitForKeyReleased(char key) {
+        while (~(key = 0)) {
+            let key = Keyboard.keyPressed();
+        }
+        return;
+    }
+
+    function void waitForTimePeriodOrKeyPress(int timeInMilliseconds) {
+        var int time;
+        let time = 0;
+        while (time < timeInMilliseconds) {
+            do Sys.wait(50);
+            if (~(Keyboard.keyPressed() = 0)) {
+                return;
+            }
+            let time = time + 50;
+        }
+        return;
+    }
+}
