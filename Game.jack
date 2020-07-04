@@ -1,7 +1,8 @@
 class Game {
     field Lifecycle lifecycle;
     static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS;
-    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_M, KEY_H, KEY_NONE;
+    static int SPEED_SLOW, SPEED_FAST;
+    static char KEY_E, KEY_G, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_M, KEY_H, KEY_NONE;
 
     constructor Game new() {
         return this;
@@ -13,7 +14,10 @@ class Game {
         let MENU_STILL_LIFES = 3;
         let MENU_OSCILLATORS = 4;
         let MENU_SPACESHIPS = 5;
+        let SPEED_SLOW = 650;
+        let SPEED_FAST = 300;
         let KEY_E = 69;
+        let KEY_G = 71;
         let KEY_H = 72;
         let KEY_L = 76;
         let KEY_M = 77;
@@ -27,12 +31,13 @@ class Game {
     method void run() {
         var char key;
         var boolean quit, running;
-        var int menu;
+        var int menu, speed;
 
         let lifecycle = Lifecycle.new();
         let quit = false;
         let running = false;
         let menu = MENU_MAIN;
+        let speed = SPEED_SLOW;
         do Menu.showMainMenu();
 
         while (~quit) {
@@ -57,16 +62,22 @@ class Game {
                 let menu = MENU_OSCILLATORS;
                 do Menu.showOscillatorsMenu();
                 do Examples.buildOscillators(lifecycle);
+                let speed = SPEED_SLOW;
                 let running = true;
             }
 
             // spaceships
             if ((key = KEY_S) & (menu = MENU_EXAMPLES)) {
                 let menu = MENU_SPACESHIPS;
+                let speed = SPEED_FAST;
                 do Menu.showSpaceshipsMenu();
             }
 
             if (menu = MENU_SPACESHIPS) {
+                if (key = KEY_G) {
+                    do Examples.addGlider(lifecycle);
+                    let running = true;
+                }
                 if (key = KEY_L) {
                     do Examples.addLightWeightSpaceship(lifecycle);
                     let running = true;
@@ -110,7 +121,7 @@ class Game {
             if (running) {
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
                 do lifecycle.tick();
-                do KeyboardHelper.waitForTimePeriodOrKeyPress(650);
+                do KeyboardHelper.waitForTimePeriodOrKeyPress(speed);
             }
         }
 

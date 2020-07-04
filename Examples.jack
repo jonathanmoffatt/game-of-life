@@ -81,6 +81,13 @@ class Examples {
         return;
     }
 
+    function void addGlider(Lifecycle lifecycle) {
+        do lifecycle.setCells(12, 12, "-x-");
+        do lifecycle.setCells(12, 13, "--x");
+        do lifecycle.setCells(12, 14, "xxx");
+        return;
+    }
+
     function void addLightWeightSpaceship(Lifecycle lifecycle) {
         do lifecycle.setCells(8, 3, "--xx-");
         do lifecycle.setCells(8, 4, "xx-xx");
