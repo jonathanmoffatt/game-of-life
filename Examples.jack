@@ -67,6 +67,7 @@ class Examples {
         do lifecycle.setCells(5, row + 7, "xxx");
 
         // pulsar
+        let row = row - 3;
         do lifecycle.setCells(15, row + 0, "--xxx---xxx--");
         do lifecycle.setCells(15, row + 1, "-------------");
         do lifecycle.setCells(15, row + 2, "x----x-x----x");

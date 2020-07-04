@@ -1,6 +1,7 @@
 class Main {
     function void main() {
         var Game game;
+        do Game.init();
         do Menu.showMainMenu();
         let game = Game.new();
         do game.run();

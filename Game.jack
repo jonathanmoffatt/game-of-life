@@ -1,66 +1,85 @@
 class Game {
     field Lifecycle lifecycle;
+    static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS;
+    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_NONE;
 
     constructor Game new() {
         return this;
     }
+    
+    function void init() {
+        let MENU_MAIN = 1;
+        let MENU_EXAMPLES = 2;
+        let MENU_STILL_LIFES = 3;
+        let MENU_OSCILLATORS = 4;
+        let MENU_SPACESHIPS = 5;
+        let KEY_E = 69;
+        let KEY_L = 76;
+        let KEY_O = 79;
+        let KEY_P = 80;
+        let KEY_Q = 81;
+        return;
+    }
 
     method void run() {
         var char key;
-        var boolean quit, refresh, running;
-        var int menu, currentMenu;
+        var boolean quit, running;
+        var int menu;
 
         let lifecycle = Lifecycle.new();
-        let menu = 1;
-        let currentMenu = 0;
-
         let quit = false;
         let running = false;
+        let menu = MENU_MAIN;
+        do Menu.showMainMenu();
+
         while (~quit) {
-            let refresh = ~(menu = currentMenu);
-            if ((menu = 1) & refresh) { do Menu.showMainMenu(); }
-            if ((menu = 2) & refresh) { do Menu.showExamplesMenu(); }
-            let currentMenu = menu;
-            if (running) {
-                let key = Keyboard.keyPressed();
-            } else {
-                let key = KeyboardHelper.waitForKeyPressed();
-            }
+            let key = Keyboard.keyPressed();
 
             // E key: examples menu
-            if ((key = 69) & (menu = 1)) { let menu = 2; }
+            if ((key = KEY_E) & (menu = MENU_MAIN)) { 
+                let menu = MENU_EXAMPLES; 
+                do Menu.showExamplesMenu();
+            }
 
             // L key: still lifes
-            if ((key = 76) & (menu = 2)) {
+            if ((key = KEY_L) & (menu = MENU_EXAMPLES)) {
+                let menu = MENU_STILL_LIFES;
                 do Menu.showStillLifesMenu();
                 do Examples.buildStillLifes(lifecycle, 9);
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
-                let menu = 3;
             } 
 
             // O key: oscillators
-            if ((key = 79) & (menu = 2)) {
+            if ((key = KEY_O) & (menu = MENU_EXAMPLES)) {
+                let menu = MENU_OSCILLATORS;
                 do Menu.showOscillatorsMenu();
                 do Examples.buildOscillators(lifecycle);
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
                 let running = true;
-                let menu = 4;
             }
 
             // P key: pause or unpause
-            if ((key = 80) & (menu = 4)) {
+            if ((key = KEY_P) & ((menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS))) {
                 let running = ~running;
             }
 
             // Q key: quit or move back to previous menu
-            if (key = 81) {
-                if (menu = 1) { let quit = true; } 
-                if (menu = 2) { let menu = 1; }
-                if (menu = 3) { let menu = 2; }
-                if (menu = 4) { let menu = 2; }
+            if (key = KEY_Q) {
+                if (menu = MENU_MAIN) { 
+                    do Menu.showFarewellMessage();
+                    let quit = true; 
+                } 
+                if (menu = MENU_EXAMPLES) { 
+                    let menu = MENU_MAIN; 
+                    do Menu.showMainMenu();
+                }
+                if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS)) { 
+                    let menu = MENU_EXAMPLES; 
+                    do Menu.showExamplesMenu();
+                }
                 let running = false;
             }
-            if (~(key = 0)) {
+            if (~(key = KEY_NONE)) {
                 do KeyboardHelper.waitForKeyReleased(key);
             }
 
@@ -71,7 +90,6 @@ class Game {
             }
         }
 
-        do Menu.showFarewellMessage();
         return;
     }
 

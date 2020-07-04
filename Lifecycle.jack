@@ -109,19 +109,16 @@ class Lifecycle {
         return count;
     }
 
-    method void populate(Array iteration) {
-        do ArrayHelper.cleanUp(iteration1);
-        let iteration1 = iteration;
-        return;
-    }
-
     method void clear() {
         do ArrayHelper.clearGrid(iteration1);
+        do ArrayHelper.clearGrid(iteration2);
         return;
     }
 
     method void setCells(int x, int y, String cells) {
-        do ArrayHelper.setArrayCells(iteration1, x, y, cells);
+        var Array iteration;
+        let iteration = getCurrentIteration();
+        do ArrayHelper.setArrayCells(iteration, x, y, cells);
         return;
     }
 
