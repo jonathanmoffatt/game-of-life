@@ -1,0 +1,37 @@
+class Lifecycle {
+    field Array currentIteration, nextIteration;
+
+    constructor Lifecycle new() {
+        let currentIteration = ArrayHelper.getEmptyGrid();
+        let nextIteration = ArrayHelper.getEmptyGrid();
+        return this;
+    }
+
+    method Array getIteration() {
+        return currentIteration;
+    }
+
+    method void populate(Array iteration) {
+        do ArrayHelper.cleanUp(currentIteration);
+        let currentIteration = iteration;
+        return;
+    }
+
+    method void clear() {
+        do ArrayHelper.clearGrid(currentIteration);
+        return;
+    }
+
+    method void setCells(int x, int y, String cells) {
+        do ArrayHelper.setArrayCells(currentIteration, x, y, cells);
+        return;
+    }
+
+    method void dispose() {
+        do ArrayHelper.cleanUp(currentIteration);
+        do ArrayHelper.cleanUp(nextIteration);
+        do Memory.deAlloc(this);
+        return;
+    }
+
+}

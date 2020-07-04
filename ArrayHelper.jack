@@ -46,18 +46,12 @@ class ArrayHelper {
         return;
     }
 
-    function void setArrayCells(Array cells, int x, int y, int height, Array cellsAsString) {
-        var int i, j;
-        var String row;
+    function void setArrayCells(Array cellGrid, int x, int y, String cells) {
+        var int i;
         let i = 0;
-        while (i < height) {
-            let row = cellsAsString[i];
-            let j = 0;
-            while (j < row.length()) {
-                // a - (char 45) will leave the cell blank, anything else will set it
-                do ArrayHelper.setArrayCell(cells, x + j, y + i, ~(row.charAt(j) = 45));
-                let j = j + 1;
-            }
+        while (i < cells.length()) {
+            // a - (char 45) will leave the cell blank, anything else will set it
+            do ArrayHelper.setArrayCell(cellGrid, x + i, y, ~(cells.charAt(i) = 45));
             let i = i + 1;
         }
         return;

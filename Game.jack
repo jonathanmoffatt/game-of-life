@@ -1,5 +1,5 @@
 class Game {
-    field Array currentIteration, nextIteration;
+    field Lifecycle lifecycle;
 
     constructor Game new() {
         return this;
@@ -10,7 +10,7 @@ class Game {
         var boolean quit, refresh;
         var int menu, currentMenu;
 
-        let currentIteration = ArrayHelper.getEmptyGrid();
+        let lifecycle = Lifecycle.new();
         let menu = 1;
         let currentMenu = 0;
 
@@ -28,16 +28,16 @@ class Game {
             // L key: still lifes
             if ((key = 76) & (menu = 2)) {
                 do Menu.showStillLifesMenu();
-                do Examples.buildStillLifes(currentIteration, 9);
-                do Grid.fillFromArray(currentIteration);
+                do Examples.buildStillLifes(lifecycle, 9);
+                do Grid.fillFromArray(lifecycle.getIteration());
                 let menu = 3;
             } 
 
             // O key: oscillators
             if ((key = 79) & (menu = 2)) {
                 do Menu.showOscillatorsMenu();
-                do Examples.buildOscillators(currentIteration);
-                do Grid.fillFromArray(currentIteration);
+                do Examples.buildOscillators(lifecycle);
+                do Grid.fillFromArray(lifecycle.getIteration());
                 let menu = 4;
             }
 
@@ -56,7 +56,7 @@ class Game {
     }
 
     method void dispose() {
-        do ArrayHelper.cleanUp(currentIteration);
+        do lifecycle.dispose();
         do Memory.deAlloc(this);
         return;
     }
