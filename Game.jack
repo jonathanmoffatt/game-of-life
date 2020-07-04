@@ -7,7 +7,7 @@ class Game {
 
     method void run() {
         var char key;
-        var boolean quit, refresh;
+        var boolean quit, refresh, running;
         var int menu, currentMenu;
 
         let lifecycle = Lifecycle.new();
@@ -15,6 +15,7 @@ class Game {
         let currentMenu = 0;
 
         let quit = false;
+        let running = false;
         while (~quit) {
             let refresh = ~(menu = currentMenu);
             if ((menu = 1) & refresh) { do Menu.showMainMenu(); }
@@ -29,7 +30,7 @@ class Game {
             if ((key = 76) & (menu = 2)) {
                 do Menu.showStillLifesMenu();
                 do Examples.buildStillLifes(lifecycle, 9);
-                do Grid.fillFromArray(lifecycle.getIteration());
+                do Grid.fillFromArray(lifecycle.getCurrentIteration());
                 let menu = 3;
             } 
 
@@ -37,7 +38,8 @@ class Game {
             if ((key = 79) & (menu = 2)) {
                 do Menu.showOscillatorsMenu();
                 do Examples.buildOscillators(lifecycle);
-                do Grid.fillFromArray(lifecycle.getIteration());
+                do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                let running = true;
                 let menu = 4;
             }
 
@@ -47,8 +49,15 @@ class Game {
                 if (menu = 2) { let menu = 1; }
                 if (menu = 3) { let menu = 2; }
                 if (menu = 4) { let menu = 2; }
+                let running = false;
             }
             do Game.waitForKeyReleased(key);
+            
+            if (running) {
+                do Sys.wait(1000);
+                do lifecycle.next();
+                do Grid.fillFromArray(lifecycle.getCurrentIteration());
+            }
         }
 
         do Menu.showFarewellMessage();
