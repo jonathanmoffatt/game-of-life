@@ -27,9 +27,10 @@ class Game {
 
             // L key: still lifes
             if ((key = 76) & (menu = 2)) {
-                do ArrayHelper.clearGrid(currentIteration);
-                do Examples.buildStillLifes(currentIteration, 12);
+                do Menu.showStillLifesMenu();
+                do Examples.buildStillLifes(currentIteration, 9);
                 do Grid.fillFromArray(currentIteration);
+                let menu = 3;
             } 
 
             // O key: oscillators
@@ -44,6 +45,7 @@ class Game {
             if (key = 81) {
                 if (menu = 1) { let quit = true; } 
                 if (menu = 2) { let menu = 1; }
+                if (menu = 3) { let menu = 2; }
                 if (menu = 4) { let menu = 2; }
             }
             do Game.waitForKeyReleased(key);

@@ -41,6 +41,25 @@ class Menu {
         return;
     }
 
+    function void showStillLifesMenu() {
+        var int line;
+
+        do Screen.clearScreen();
+        let line = 1;
+        do Menu.print("Still lifes", line, 2);
+        let line = line + 1;
+        do Menu.print("-----------", line, 2);
+        let line = line + 3;
+        do Menu.print("Block / Bee hive / Loaf", line, 4);
+        let line = line + 2;
+        do Menu.print("Boat / Tub", line, 4);
+        let line = line + 3;
+        do Menu.print("(Q) Quit", line, 4);
+        do Menu.showFooter();
+        do Grid.draw();
+        return;
+    }
+
     function void showOscillatorsMenu() {
         var int line;
 
