@@ -1,7 +1,7 @@
 class Game {
     field Lifecycle lifecycle;
     static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS;
-    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_NONE;
+    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_NONE;
 
     constructor Game new() {
         return this;
@@ -18,6 +18,7 @@ class Game {
         let KEY_O = 79;
         let KEY_P = 80;
         let KEY_Q = 81;
+        let KEY_S = 83;
         return;
     }
 
@@ -35,13 +36,13 @@ class Game {
         while (~quit) {
             let key = Keyboard.keyPressed();
 
-            // E key: examples menu
+            // examples menu
             if ((key = KEY_E) & (menu = MENU_MAIN)) { 
                 let menu = MENU_EXAMPLES; 
                 do Menu.showExamplesMenu();
             }
 
-            // L key: still lifes
+            // still lifes
             if ((key = KEY_L) & (menu = MENU_EXAMPLES)) {
                 let menu = MENU_STILL_LIFES;
                 do Menu.showStillLifesMenu();
@@ -49,7 +50,7 @@ class Game {
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
             } 
 
-            // O key: oscillators
+            // oscillators
             if ((key = KEY_O) & (menu = MENU_EXAMPLES)) {
                 let menu = MENU_OSCILLATORS;
                 do Menu.showOscillatorsMenu();
@@ -58,12 +59,21 @@ class Game {
                 let running = true;
             }
 
-            // P key: pause or unpause
+            // spaceships
+            if ((key = KEY_S) & (menu = MENU_EXAMPLES)) {
+                let menu = MENU_SPACESHIPS;
+                do Menu.showSpaceshipsMenu();
+                do Examples.buildSpaceships(lifecycle);
+                do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                let running = true;
+            }
+
+            // pause or unpause
             if ((key = KEY_P) & ((menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS))) {
                 let running = ~running;
             }
 
-            // Q key: quit or move back to previous menu
+            // quit or move back to previous menu
             if (key = KEY_Q) {
                 if (menu = MENU_MAIN) { 
                     do Menu.showFarewellMessage();
@@ -73,7 +83,7 @@ class Game {
                     let menu = MENU_MAIN; 
                     do Menu.showMainMenu();
                 }
-                if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS)) { 
+                if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS) | (menu = MENU_SPACESHIPS)) { 
                     let menu = MENU_EXAMPLES; 
                     do Menu.showExamplesMenu();
                 }

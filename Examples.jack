@@ -84,4 +84,37 @@ class Examples {
 
         return;
     }
+
+    function void buildSpaceships(Lifecycle lifecycle) {
+        var int row;
+
+        do lifecycle.clear();
+        
+        let row = 3;
+
+        // light-weight
+        do lifecycle.setCells(8, row + 0, "--xx-");
+        do lifecycle.setCells(8, row + 1, "xx-xx");
+        do lifecycle.setCells(8, row + 2, "xxxx-");
+        do lifecycle.setCells(8, row + 3, "-xx--");
+
+        let row = row + 8;
+
+        // middle-weight
+        do lifecycle.setCells(8, row + 0, "--x---");
+        do lifecycle.setCells(8, row + 1, "x---x-");
+        do lifecycle.setCells(8, row + 2, "-----x");
+        do lifecycle.setCells(8, row + 3, "x----x");
+        do lifecycle.setCells(8, row + 4, "-xxxxx");
+
+        let row = row + 11;
+
+        // heavy-weight
+        do lifecycle.setCells(7, row + 0, "-xxxx--");
+        do lifecycle.setCells(7, row + 1, "xxxxxx-");
+        do lifecycle.setCells(7, row + 2, "xxxx-xx");
+        do lifecycle.setCells(7, row + 3, "----xx-");
+
+        return;
+    }
 }
