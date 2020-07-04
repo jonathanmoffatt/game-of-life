@@ -21,7 +21,11 @@ class Game {
             if ((menu = 1) & refresh) { do Menu.showMainMenu(); }
             if ((menu = 2) & refresh) { do Menu.showExamplesMenu(); }
             let currentMenu = menu;
-            let key = Game.waitForKeyPressed();
+            // if (running) {
+            //     let key = Keyboard.keyPressed();
+            // } else {
+                let key = Game.waitForKeyPressed();
+            // }
 
             // E key: examples menu
             if ((key = 69) & (menu = 1)) { let menu = 2; }
@@ -51,11 +55,13 @@ class Game {
                 if (menu = 4) { let menu = 2; }
                 let running = false;
             }
-            do Game.waitForKeyReleased(key);
-            
+            // if (~(key = 0)) {
+                do Game.waitForKeyReleased(key);
+            // }
+
             if (running) {
-                do Sys.wait(1000);
-                do lifecycle.next();
+                // do Sys.wait(1000);
+                do lifecycle.tick();
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
             }
         }

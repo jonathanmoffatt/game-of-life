@@ -25,7 +25,7 @@ class Lifecycle {
         }
     }
 
-    method boolean next() {
+    method boolean tick() {
         var Array current, next, currentRow, nextRow;
         var int x, y, neighbours;
         var boolean alive, changed;
@@ -42,13 +42,21 @@ class Lifecycle {
                 let alive = currentRow[x];
                 let neighbours = numberOfNeighbours(x, y);
                 if ((neighbours < 2) & alive) {
+                    // underpopulation
                     let alive = false;
                     let changed = true;
                 } 
                 if ((neighbours = 3) & ~alive) {
+                    // reproduction
                     let alive = true;
                     let changed = true;
                 }
+                if ((neighbours > 3) & alive) {
+                    // overpopulation
+                    let alive = false;
+                    let changed = true;
+                }
+
                 let nextRow[x] = alive;
                 let x = x + 1;
             }
