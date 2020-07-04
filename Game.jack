@@ -154,6 +154,7 @@ class Game {
                 } 
                 if ((menu = MENU_EXAMPLES) | (menu = MENU_NEW_GAME)) { 
                     let menu = MENU_MAIN; 
+                    do lifecycle.clear();
                     do Menu.showMainMenu();
                 }
                 if (menu = MENU_RUNNING) {
@@ -161,6 +162,7 @@ class Game {
                     do Menu.showNewGameMenu();
                     do lifecycle.restore();
                     do draw();
+                    do editor.startEditing();
                 }
                 if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS) | (menu = MENU_SPACESHIPS)) { 
                     let menu = MENU_EXAMPLES; 

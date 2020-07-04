@@ -12,8 +12,6 @@ class Menu {
         let line = line + 2;
         do Menu.print("(E) Examples", line, 4);
         let line = line + 2;
-        do Menu.print("(H) Help", line, 4);
-        let line = line + 2;
         do Menu.print("(Q) Quit", line, 4);
         do Menu.showFooter();
         do Grid.draw();
