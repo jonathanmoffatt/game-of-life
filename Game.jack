@@ -1,7 +1,7 @@
 class Game {
     field Lifecycle lifecycle;
     static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS;
-    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_NONE;
+    static char KEY_E, KEY_L, KEY_O, KEY_P, KEY_Q, KEY_S, KEY_M, KEY_H, KEY_NONE;
 
     constructor Game new() {
         return this;
@@ -14,7 +14,9 @@ class Game {
         let MENU_OSCILLATORS = 4;
         let MENU_SPACESHIPS = 5;
         let KEY_E = 69;
+        let KEY_H = 72;
         let KEY_L = 76;
+        let KEY_M = 77;
         let KEY_O = 79;
         let KEY_P = 80;
         let KEY_Q = 81;
@@ -47,7 +49,7 @@ class Game {
                 let menu = MENU_STILL_LIFES;
                 do Menu.showStillLifesMenu();
                 do Examples.buildStillLifes(lifecycle, 9);
-                do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                let running = true;
             } 
 
             // oscillators
@@ -55,7 +57,6 @@ class Game {
                 let menu = MENU_OSCILLATORS;
                 do Menu.showOscillatorsMenu();
                 do Examples.buildOscillators(lifecycle);
-                do Grid.fillFromArray(lifecycle.getCurrentIteration());
                 let running = true;
             }
 
@@ -63,13 +64,25 @@ class Game {
             if ((key = KEY_S) & (menu = MENU_EXAMPLES)) {
                 let menu = MENU_SPACESHIPS;
                 do Menu.showSpaceshipsMenu();
-                do Examples.buildSpaceships(lifecycle);
-                do Grid.fillFromArray(lifecycle.getCurrentIteration());
-                let running = true;
+            }
+
+            if (menu = MENU_SPACESHIPS) {
+                if (key = KEY_L) {
+                    do Examples.addLightWeightSpaceship(lifecycle);
+                    let running = true;
+                }
+                if (key = KEY_M) {
+                    do Examples.addMiddleWeightSpaceship(lifecycle);
+                    let running = true;
+                }
+                if (key = KEY_H) {
+                    do Examples.addHeavyWeightSpaceship(lifecycle);
+                    let running = true;
+                }
             }
 
             // pause or unpause
-            if ((key = KEY_P) & ((menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS))) {
+            if ((key = KEY_P) & ((menu = MENU_STILL_LIFES) | (menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS))) {
                 let running = ~running;
             }
 
@@ -85,6 +98,7 @@ class Game {
                 }
                 if ((menu = MENU_STILL_LIFES) | (menu = MENU_OSCILLATORS) | (menu = MENU_SPACESHIPS)) { 
                     let menu = MENU_EXAMPLES; 
+                    do lifecycle.clear();
                     do Menu.showExamplesMenu();
                 }
                 let running = false;
@@ -94,8 +108,8 @@ class Game {
             }
 
             if (running) {
-                do lifecycle.tick();
                 do Grid.fillFromArray(lifecycle.getCurrentIteration());
+                do lifecycle.tick();
                 do KeyboardHelper.waitForTimePeriodOrKeyPress(650);
             }
         }

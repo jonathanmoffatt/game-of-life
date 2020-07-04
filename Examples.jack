@@ -1,7 +1,5 @@
 class Examples {
     function void buildStillLifes(Lifecycle lifecycle, int row) {
-        do lifecycle.clear();
-        
         // block
         do lifecycle.setCells(7, row + 1, "xx");
         do lifecycle.setCells(7, row + 2, "xx");
@@ -25,9 +23,9 @@ class Examples {
         do lifecycle.setCells(10, row + 2, "-x--");
 
         // tub
-        do lifecycle.setCells(10, row + 0, "-x--");
-        do lifecycle.setCells(10, row + 1, "x-x-");
-        do lifecycle.setCells(10, row + 2, "-x--");
+        do lifecycle.setCells(19, row + 0, "-x--");
+        do lifecycle.setCells(19, row + 1, "x-x-");
+        do lifecycle.setCells(19, row + 2, "-x--");
 
         return;
     }
@@ -35,8 +33,6 @@ class Examples {
     function void buildOscillators(Lifecycle lifecycle) {
         var int row;
 
-        do lifecycle.clear();
-        
         let row = 5;
 
         // blinker
@@ -85,36 +81,28 @@ class Examples {
         return;
     }
 
-    function void buildSpaceships(Lifecycle lifecycle) {
-        var int row;
+    function void addLightWeightSpaceship(Lifecycle lifecycle) {
+        do lifecycle.setCells(8, 3, "--xx-");
+        do lifecycle.setCells(8, 4, "xx-xx");
+        do lifecycle.setCells(8, 5, "xxxx-");
+        do lifecycle.setCells(8, 6, "-xx--");
+        return;
+    }
 
-        do lifecycle.clear();
-        
-        let row = 3;
+    function void addMiddleWeightSpaceship(Lifecycle lifecycle) {
+        do lifecycle.setCells(8, 10, "--x---");
+        do lifecycle.setCells(8, 11, "x---x-");
+        do lifecycle.setCells(8, 12, "-----x");
+        do lifecycle.setCells(8, 13, "x----x");
+        do lifecycle.setCells(8, 14, "-xxxxx");
+        return;
+    }
 
-        // light-weight
-        do lifecycle.setCells(8, row + 0, "--xx-");
-        do lifecycle.setCells(8, row + 1, "xx-xx");
-        do lifecycle.setCells(8, row + 2, "xxxx-");
-        do lifecycle.setCells(8, row + 3, "-xx--");
-
-        let row = row + 8;
-
-        // middle-weight
-        do lifecycle.setCells(8, row + 0, "--x---");
-        do lifecycle.setCells(8, row + 1, "x---x-");
-        do lifecycle.setCells(8, row + 2, "-----x");
-        do lifecycle.setCells(8, row + 3, "x----x");
-        do lifecycle.setCells(8, row + 4, "-xxxxx");
-
-        let row = row + 11;
-
-        // heavy-weight
-        do lifecycle.setCells(7, row + 0, "-xxxx--");
-        do lifecycle.setCells(7, row + 1, "xxxxxx-");
-        do lifecycle.setCells(7, row + 2, "xxxx-xx");
-        do lifecycle.setCells(7, row + 3, "----xx-");
-
+    function void addHeavyWeightSpaceship(Lifecycle lifecycle) {
+        do lifecycle.setCells(7, 20, "-xxxx--");
+        do lifecycle.setCells(7, 21, "xxxxxx-");
+        do lifecycle.setCells(7, 22, "xxxx-xx");
+        do lifecycle.setCells(7, 23, "----xx-");
         return;
     }
 }

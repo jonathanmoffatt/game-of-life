@@ -90,11 +90,11 @@ class Menu {
         let line = line + 1;
         do Menu.print("----------", line, 2);
         let line = line + 3;
-        do Menu.print("Light-weight spaceship", line, 4);
+        do Menu.print("(L) Light-weight spaceship", line, 4);
         let line = line + 2;
-        do Menu.print("Middle-weight spaceship", line, 4);
+        do Menu.print("(M) Middle-weight spaceship", line, 4);
         let line = line + 2;
-        do Menu.print("Heavy-weight spaceship", line, 4);
+        do Menu.print("(H) Heavy-weight spaceship", line, 4);
         let line = line + 3;
         do Menu.print("(P) Pause or unpause", line, 4);
         let line = line + 2;
