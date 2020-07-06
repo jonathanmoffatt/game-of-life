@@ -1,6 +1,7 @@
 class Game {
     field Lifecycle lifecycle;
     field Editor editor;
+    field SplashScreen splashScreen;
     field int x, y;
     static int MENU_NONE, MENU_MAIN, MENU_EXAMPLES, MENU_STILL_LIFES, MENU_OSCILLATORS, MENU_SPACESHIPS, MENU_NEW_GAME, MENU_RUNNING;
     static int SPEED_SLOW, SPEED_FAST;
@@ -46,8 +47,10 @@ class Game {
         var char key;
         var boolean quit, running, arrow, canBeRunning;
         var int menu, speed;
+        var String test;
 
-        do SplashScreen.draw();
+        let splashScreen = SplashScreen.new();
+        do splashScreen.draw();
         do KeyboardHelper.waitForKeyPressed();
         
         let lifecycle = Lifecycle.new();
@@ -194,6 +197,7 @@ class Game {
 
     method void dispose() {
         do lifecycle.dispose();
+        do splashScreen.dispose();
         do Memory.deAlloc(this);
         return;
     }
