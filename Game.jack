@@ -47,6 +47,9 @@ class Game {
         var boolean quit, running, arrow, canBeRunning;
         var int menu, speed;
 
+        do SplashScreen.draw();
+        do KeyboardHelper.waitForKeyPressed();
+        
         let lifecycle = Lifecycle.new();
         let editor = Editor.new(lifecycle);
         let quit = false;
