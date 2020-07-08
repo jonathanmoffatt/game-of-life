@@ -1,4 +1,12 @@
-class SplashScreen {
+/*
+Image was constructed by:
+- taking from https://www.theguardian.com/science/2020/apr/20/can-you-solve-it-john-horton-conway-playful-maths-genius
+- resizing using https://picresize.com 
+- dithering using https://29a.ch/ditherlicious/
+- converting to binary using https://www.dcode.fr/binary-image
+- converting to pokes using the ImageGeneration.xlsx spreadsheet
+*/
+class JohnConwayImage {
 
     function void draw() {
         do Memory.poke(17167, 28527); do Memory.poke(17168, -4241); do Memory.poke(17169, -531); do Memory.poke(17170, -1026); do Memory.poke(17171, -8482); do Memory.poke(17172, -9254); do Memory.poke(17173, -273); do Memory.poke(17174, -2049); do Memory.poke(17175, -16661); do Memory.poke(17176, -4097); do Memory.poke(17177, -4099); do Memory.poke(17178, -67); do Memory.poke(17179, -67); do Memory.poke(17180, -2113); do Memory.poke(17181, -2305); do Memory.poke(17182, -10506); 

@@ -17,7 +17,7 @@ class Menu {
         do Menu.print("John Horton Conway", 18, 37);
         do Menu.print("   1937 - 2020", 19, 37);
         do Menu.print("Photo: Hollandse Hoogte/Eyevine", 21, 31);
-        do SplashScreen.draw();
+        do JohnConwayImage.draw();
         return;
     }
 
