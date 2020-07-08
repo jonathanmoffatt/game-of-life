@@ -14,7 +14,10 @@ class Menu {
         let line = line + 2;
         do Menu.print("(Q) Quit", line, 4);
         do Menu.showFooter();
-        do Grid.draw();
+        do Menu.print("John Horton Conway", 18, 37);
+        do Menu.print("   1937 - 2020", 19, 37);
+        do Menu.print("Photo: Hollandse Hoogte/Eyevine", 21, 31);
+        do SplashScreen.draw();
         return;
     }
 
