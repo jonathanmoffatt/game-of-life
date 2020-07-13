@@ -1,4 +1,8 @@
+/*
+    Preset examples of common game of life patterns
+*/
 class Examples {
+
     function void buildStillLifes(Lifecycle lifecycle, int row) {
         // block
         do lifecycle.setCells(7, row + 1, "xx");

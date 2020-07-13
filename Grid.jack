@@ -1,4 +1,9 @@
+/*
+    Grid utility functions
+*/
 class Grid {
+
+    // draws an empty 32 x 32 grid on the right hand side of the screen
     function void draw() {
         var int y, i, x, address, pattern;
         let y = 0;
@@ -24,6 +29,7 @@ class Grid {
         return;
     }
 
+    // fills in cells in the grid from a 32 x 32 array of booleans
     function void fillFromArray(Array cells) {
         var int x, y;
         var Array row;
@@ -40,6 +46,7 @@ class Grid {
         return;
     }
 
+    // fills in the cell at x,y with the specified color (true for black, false for white)
     function void fill(int x, int y, boolean color) {
         var int x1, y1;
         let x1 = 257 + (x * 8);
@@ -49,6 +56,7 @@ class Grid {
         return;
     }
 
+    // draws a cursor "dot" at x,y in the specified color (true for black, false for white)
     function void drawCursor(int x, int y, boolean color) {
         var int x1, y1;
         let x1 = 259 + (x * 8);

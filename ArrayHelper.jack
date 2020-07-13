@@ -1,4 +1,9 @@
+/*
+    Array utility functions
+*/
 class ArrayHelper {
+
+    // gets a two dimensional 32x32 array populated with false in every element
     function Array getEmptyGrid() {
         var Array rows, columns;
         var int i;
@@ -12,6 +17,7 @@ class ArrayHelper {
         return rows;
     }
 
+    // gets a 32 element array populated with false in every element
     function Array getEmptyArray() {
         var Array empty;
         let empty = Array.new(32);
@@ -19,6 +25,7 @@ class ArrayHelper {
         return empty;
     }
 
+    // clears a 32 element array by setting every element to false
     function void clearGridRow(Array gridRow) {
         var int i;
         let i = 0;
@@ -29,6 +36,7 @@ class ArrayHelper {
         return;
     }
 
+    // clears a two dimensional 32 x 32 array by setting every element to false
     function void clearGrid(Array grid) {
         var int row;
         let row = 0;
@@ -39,6 +47,7 @@ class ArrayHelper {
         return;
     }
 
+    // sets the status of the cell at x,y to either alive or dead
     function void setArrayCell(Array cells, int x, int y, boolean alive) {
         var Array row;
         let row = cells[y];
@@ -46,6 +55,8 @@ class ArrayHelper {
         return;
     }
 
+    // sets cells starting at x,y and travelling horizontally using a string shorthand in "---x-x-xx" style,
+    // where "-" represents a dead cell and "x" represents a live one
     function void setArrayCells(Array cellGrid, int x, int y, String cells) {
         var int i;
         let i = 0;
@@ -57,6 +68,7 @@ class ArrayHelper {
         return;
     }
 
+    // copies values from the source 32 x 32 two dimensional array to the target array
     function void copyGrid(Array source, Array target) {
         var Array sourceRow, targetRow;
         var int x, y;
@@ -74,6 +86,7 @@ class ArrayHelper {
         return;
     }
 
+    // calls dispose on all arrays in a two dimensional 32 x 32 array
     function void cleanUp(Array cells) {
         var Array row;
         var int i;

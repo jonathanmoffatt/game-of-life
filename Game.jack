@@ -1,3 +1,10 @@
+/*
+    Game controller. 
+
+    - manages keyboard event loop
+    - handles transitions between menus
+    - runs the game lifecycle "ticks"
+*/
 class Game {
     field Lifecycle lifecycle;
     field Editor editor;
@@ -13,6 +20,7 @@ class Game {
         return this;
     }
     
+    // static initialiser; sets all static variables
     function void init() {
         let MENU_MAIN = 1;
         let MENU_EXAMPLES = 2;
@@ -42,6 +50,7 @@ class Game {
         return;
     }
 
+    // runs the game
     method void run() {
         var char key;
         var boolean quit, running, arrow, canBeRunning;
@@ -62,14 +71,12 @@ class Game {
             let canBeRunning = (menu = MENU_STILL_LIFES) | (menu = MENU_SPACESHIPS) | (menu = MENU_OSCILLATORS) | (menu = MENU_RUNNING);
 
             if (menu = MENU_MAIN) {
-                // new game
                 if (key = KEY_N) {
                     let menu = MENU_NEW_GAME;
                     do Menu.showNewGameMenu();
                     do lifecycle.clear();
                     do editor.startEditing();
                 }
-                // examples
                 if (key = KEY_E) { 
                     let menu = MENU_EXAMPLES; 
                     do Menu.showExamplesMenu();
@@ -98,7 +105,6 @@ class Game {
             }
 
             if (menu = MENU_EXAMPLES) {
-                // still lifes
                 if (key = KEY_L) {
                     let menu = MENU_STILL_LIFES;
                     do Menu.showStillLifesMenu();
@@ -106,7 +112,6 @@ class Game {
                     let running = true;
                 } 
 
-                // oscillators
                 if (key = KEY_O) {
                     let menu = MENU_OSCILLATORS;
                     do Menu.showOscillatorsMenu();
@@ -115,7 +120,6 @@ class Game {
                     let running = true;
                 }
 
-                // spaceships
                 if (key = KEY_S) {
                     let menu = MENU_SPACESHIPS;
                     let speed = SPEED_FAST;
@@ -185,6 +189,7 @@ class Game {
         return;
     }
 
+    // draws cells on the grid from the lifecycle's current iteration
     method void draw() {
         do Grid.fillFromArray(lifecycle.getCurrentIteration());
         return;

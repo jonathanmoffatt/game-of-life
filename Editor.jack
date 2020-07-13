@@ -1,3 +1,6 @@
+/*
+    Editor to allow the user to draw their own game starting state.
+*/
 class Editor {
     field Lifecycle lifecycle;
     field int x, y;
@@ -11,18 +14,22 @@ class Editor {
         return this;
     }
 
+    // switch to "editing" mode, where the cursor is visible
     method void startEditing() {
         let editing = true;
         do drawCursor();
         return;
     }
 
+    // switch off "editing" mode, so the cursor is hidden
     method void stopEditing() {
         do hideCursor();
         let editing = false;
         return;
     }
 
+    // draw the cursor at the current position; cursor is a black dot on dead grid squares,
+    // or a white dot on alive grid squares
     method void drawCursor() {
         var boolean alive;
         if (editing) {
@@ -32,6 +39,7 @@ class Editor {
         return;
     }
 
+    // hide the cursor at the current position
     method void hideCursor() {
         var boolean alive;
         let alive = lifecycle.isAlive(x, y);
@@ -39,6 +47,7 @@ class Editor {
         return;
     }
 
+    // switches the current cell from dead to alive or vice versa
     method void toggleCell() {
         do lifecycle.toggleCell(x, y); 
         do Grid.fillFromArray(lifecycle.getCurrentIteration());
@@ -46,6 +55,7 @@ class Editor {
         return;
     }
 
+    // moves the cursor to the left
     method void moveLeft() {
         do hideCursor();
         if (x = 0) { let x = 31; } else { let x = x - 1; }
@@ -53,6 +63,7 @@ class Editor {
         return;
     }
 
+    // moves the cursor to the right
     method void moveRight() {
         do hideCursor();
         if (x = 31) { let x = 0; } else { let x = x + 1; }
@@ -60,6 +71,7 @@ class Editor {
         return;
     }
 
+    // moves the cursor up
     method void moveUp() {
         do hideCursor();
         if (y = 0) { let y = 31; } else { let y = y - 1; }
@@ -67,6 +79,7 @@ class Editor {
         return;
     }
 
+    // moves the cursor down
     method void moveDown() {
         do hideCursor();
         if (y = 31) { let y = 0; } else { let y = y + 1; }

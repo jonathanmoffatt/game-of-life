@@ -1,3 +1,6 @@
+/*
+    Menu utility functions
+*/
 class Menu {
     function void showMainMenu() {
         var int line;
@@ -151,7 +154,7 @@ class Menu {
         do Menu.print("Nand to Tetris", 18, 2);
         do Menu.print("Assignment 9", 19, 2);
         do Menu.print("Jonathan Moffatt", 20, 2);
-        do Menu.print("June 2020 v0.1", 21, 2);
+        do Menu.print("July 2020 v0.1", 21, 2);
         return;
     }
 

@@ -1,10 +1,19 @@
 /*
-Image was constructed by:
-- taking from https://www.theguardian.com/science/2020/apr/20/can-you-solve-it-john-horton-conway-playful-maths-genius
-- resizing using https://picresize.com 
-- dithering using https://29a.ch/ditherlicious/
-- converting to binary using https://www.dcode.fr/binary-image
-- converting to pokes using the ImageGeneration.xlsx spreadsheet
+    Utility function to draw a bitmap picture of John Conway.
+
+    Image was constructed by:
+    - taking from https://www.theguardian.com/science/2020/apr/20/can-you-solve-it-john-horton-conway-playful-maths-genius
+    - resizing using https://picresize.com 
+    - dithering using https://29a.ch/ditherlicious/
+    - converting to binary using https://www.dcode.fr/binary-image
+    - splitting into 16 bit columns using Visual Studio Code
+    - transferring into Excel
+    - using Excel to reverse the 16 bit numbers into big endian
+    - using Excel to convert the 16 bit numbers into decimal
+    - using Excel to convert the decimal numbers into 2s complement
+    - using Excel to convert to poke statements
+
+    (Probably wouldn't have bothered if I'd known how much faffing around it would be.)
 */
 class JohnConwayImage {
 

@@ -1,8 +1,14 @@
+/*
+    Conway's Game of Life
+
+    Nand to Tetris Assignment 9
+    Jonathan Moffatt
+    July 2020
+*/
 class Main {
     function void main() {
         var Game game;
         do Game.init();
-        do Menu.showMainMenu();
         let game = Game.new();
         do game.run();
         do game.dispose();
